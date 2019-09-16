@@ -24,13 +24,30 @@ https://www.metaweather.com/api/location/44418/2013/4/27/
 As you can see, we can conlude the following:
 - The first one is more human-readable.
 - The second one is raw JSON which will be easier to handle in a program.
-- The weather in London has always been and always will be utterly disappointing.
+- The weather in England always has been and always will be utterly disappointing.
+
+Note that we can see what protocol is being used from the first part of the link(https). Although there are many other protocols as well, we will be focusing on HTTP/HTTPS in this lab.
 
 ## Task
-You are to create a java application which will act as a small pokemon encyclopedia (aka. a 
-[pokedex](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9dex)). You should be able to do the following:
+You are to create a java application with a text interface which will act as a small pokemon encyclopedia (aka. a 
+[pokedex](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9dex)). You should use the web service API given at [PokéAPI](https://pokeapi.co/) to collect the Pokémon data. You should be able to do the following:
 
-- Enter a name of a pokémon and get the id, name, height and weight.
+- Enter a name of a pokémon and get the id, name, height and weight
 - Enter a name of a location and get the area, region and name
-- Add more information to the pokémon lookup so that it also shows the pokémon type and lists the type weaknesses
+- Add more information to the pokémon lookup so that you can not only show the pokémon type and lists the type weaknesses
 and strengths respectively.
+
+### Requirements
+- Pokemon data must be collected from the PokéAPI
+- The application must be text based. If you want to create a graphical version you should complete the text based version first. You can then add the graphical version as an extra assignment.
+
+### Discussion
+Every time we're communicating with a server using the HTTP/HTTPS protocol we use a so-called [request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). If you go to the link, you can see that there are several methods for different situations. Try to answer the following:
+
+- Which one(s) are you using in your implementation? 
+- Based on what you are communicating to the web service, do you think that the request method is appropriate? Why/Why not?
+
+
+
+## Further reading
+- [Hypertext Transfer Protocol (HTTP/1.1) Semantics, request methods](https://tools.ietf.org/html/rfc7231#section-4)
