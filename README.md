@@ -34,8 +34,7 @@ You are to create a java application with a text interface which will act as a s
 
 - Enter a name of a pokémon and get the id, name, height and weight
 - Enter a name of a location and get the area, region and name
-- Add more information to the pokémon lookup so that you can not only show the pokémon type and lists the type weaknesses
-and strengths respectively.
+- Each pokémon has a [type](https://bulbapedia.bulbagarden.net/wiki/Type) (grass, water etc.). Each type has its strength and weaknesses, for example water types are super effective against fire types. Add more information to the pokémon lookup so that you can also show the pokémon type and list the type weaknesses and strengths respectively.
 
 ### Requirements
 - Pokemon data must be collected from the PokéAPI
