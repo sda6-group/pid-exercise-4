@@ -1,13 +1,12 @@
-import static org.junit.jupiter.api.Assertions.*;
+package se.kth.sda;
 
-class MainTest {
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
-    @org.junit.jupiter.api.Test
-    void main() {
-    }
+public class MainTest {
 
-    @org.junit.jupiter.api.Test
-    void getinfo() {
+    @Test
+    public void getinfo() {
 
 
         String res[]=new String[20];
@@ -53,7 +52,4 @@ class MainTest {
                }
     }
 
-    @org.junit.jupiter.api.Test
-    void run() {
-    }
 }

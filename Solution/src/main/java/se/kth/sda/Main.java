@@ -1,4 +1,5 @@
-import jdk.nashorn.internal.parser.JSONParser;
+package se.kth.sda;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -97,7 +98,6 @@ public class Main {
                         }else{
                             half_damage_from.append("No One");
                         }
-
 
 
                         double_damage_to=new StringBuilder();
@@ -207,7 +207,7 @@ public class Main {
     }
 
     //returned value from API as String
-    static String getinfo(String urli){
+    public static String getinfo(String urli){
         String response="";
         try {
 
