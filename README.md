@@ -33,8 +33,8 @@ You are to create a java application with a text interface which will act as a s
 [pokedex](https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9dex)). You should use the web service API given at [PokéAPI](https://pokeapi.co/) to collect the Pokémon data. You should be able to do the following:
 
 - Enter a name of a pokémon and get the id, name, height and weight
-- Enter a name of a location and get the area, region and name
-- Each pokémon has a [type](https://bulbapedia.bulbagarden.net/wiki/Type) (grass, water etc.). Each type has its strength and weaknesses, for example water types are super effective against fire types. Add more information to the pokémon lookup so that you can also show the pokémon type and list the type weaknesses and strengths respectively.
+- Enter a name of a location and get all the names of the location in different languages (the ones that are available in the response) and the name of the region it is in.
+- (Extra Task) Each pokémon has a [type](https://bulbapedia.bulbagarden.net/wiki/Type) (grass, water etc.). Each type has its strength and weaknesses, for example water types are super effective against fire types. Add more information to the pokémon lookup so that you can also show the pokémon type and list the type weaknesses and strengths respectively.
 
 ### Requirements
 - Pokemon data must be collected from the PokéAPI
