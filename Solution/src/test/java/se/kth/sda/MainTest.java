@@ -3,53 +3,36 @@ package se.kth.sda;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+
 public class MainTest {
 
+    /**
+     * This test tries out the method testRunOptionPokemonInfo. The method relies on user input so we have to simulate
+     * it.
+     */
     @Test
-    public void getinfo() {
+    public void testRunOptionPokemonInfo() {
 
+        // Here we are simulating user input by making it so that java doesn't read from the console, but from our
+        // own input stream, which is fed the string "pikachu".
+        String data = "pikachu";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Main.runOptionPokemonInformation();
+    }
 
-        String res[]=new String[20];
-        res[1]="{" +"\"areas\":["+"{" +
-                "\"name\":\"canalave-city-area\"," +
-                "\"url\":\"https://pokeapi.co/api/v2/location-area/1/\"" +
-                "}" +
-                "]," +
-                "\"game_indices\":[" +
-                "{" +
-                "\"game_index\":7," +
-                "\"generation\":{" +
-                "\"name\":\"generation-iv\"," +
-                "\"url\":\"https://pokeapi.co/api/v2/generation/4/\"" +
-                "}" +
-                "}" +
-                "]," +
-                "\"id\":1," +
-                "\"name\":\"canalave-city\"," +
-                "\"names\":[" +
-                "{" +
-                "\"language\":{" +
-                "\"name\":\"en\"," +
-                "\"url\":\"https://pokeapi.co/api/v2/language/9/\"" +
-                "}," +
-                "\"name\":\"Canalave City\"" +
-                "}," +
-                "{" +
-                "\"language\":{" +
-                "\"name\":\"fr\"," +
-                "\"url\":\"https://pokeapi.co/api/v2/language/5/\"" +
-                "}," +
-                "\"name\":\"Joliberges\"" +
-                "}" +
-                "]," +
-                "\"region\":{" +
-                "\"name\":\"sinnoh\"," +
-                "\"url\":\"https://pokeapi.co/api/v2/region/4/\"" +
-                "}" +
-                "}";
-               for (int i=1;i<=1;i++){
-                   assertEquals(Main.getinfo("https://pokeapi.co/api/v2/location/"+i),res[i]);
-               }
+    /**
+     * This test tries out the method testRunOptionPokemonInfo. The method relies on user input so we have to simulate
+     * it.
+     */
+    @Test
+    public void testRunOptionPokemonInfoBadInput() {
+
+        // Here we are simulating user input by making it so that java doesn't read from the console, but from our
+        // own input stream, which is fed the string "pikachu".
+        String data = "awfeaf";
+        System.setIn(new ByteArrayInputStream(data.getBytes()));
+        Main.runOptionPokemonInformation();
     }
 
 }
