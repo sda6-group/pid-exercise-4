@@ -36,17 +36,18 @@ You are to create a java application with a text interface which will act as a s
 - Enter a name of a location and get all the names of the location in different languages (the ones that are available in the response) and the name of the region it is in.
 - (Extra Task) Each pokémon has a [type](https://bulbapedia.bulbagarden.net/wiki/Type) (grass, water etc.). Each type has its strength and weaknesses, for example water types are super effective against fire types. Add more information to the pokémon lookup so that you can also show the pokémon type and list the type weaknesses and strengths respectively.
 
+As a little help you are given a link ([HTTP request sample](https://gist.github.com/kwabe007/504ebe045ae700b36148d23bef06c88d)) to a code snippet showing you how to make an HTTPRequest in java. Read through it and try to understand what it is doing in general.
+
 ### Requirements
 - Pokemon data must be collected from the PokéAPI
 - The application must be text based. If you want to create a graphical version you should complete the text based version first. You can then add the graphical version as an extra assignment.
+- Tests are not a strict requirement this assignment as they can be a bit difficult (but not impossible) to implement on programs that make network-related requests to other servers. Although feel free to make tests for the parts that you know :) 
 
 ### Discussion
 Every time we're communicating with a server using the HTTP/HTTPS protocol we use a so-called [request method](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). If you go to the link, you can see that there are several methods for different situations. Try to answer the following:
 
 - Which one(s) are you using in your implementation? 
 - Based on what you are communicating to the web service, do you think that the request method is appropriate? Why/Why not?
-
-
 
 ## Further reading
 - [Hypertext Transfer Protocol (HTTP/1.1) Semantics, request methods](https://tools.ietf.org/html/rfc7231#section-4)

@@ -118,7 +118,6 @@ public class Main {
     public static String getInfo(String urli) {
         String response = null;
         try {
-
             URL url = new URL(urli);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
