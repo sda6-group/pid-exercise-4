@@ -12,14 +12,12 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class Main {
-
     private static final String POKEMON_API_BASE_URL = "https://pokeapi.co/api/v2/";
     private static final String POKEMON_API_POKEMON_URL = POKEMON_API_BASE_URL + "pokemon/";
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         boolean exit = false;
-
 
         while (!exit) {
             System.out.println("1- Information about a Pokemon");
@@ -118,6 +116,7 @@ public class Main {
     /**
      * Takes in an url and makes a get request to the given url and returns the body of the response as a string.
      * Returns null if response code is not 200 or some unexpected error occurs with the connection.
+     *
      * @param urlString
      * @return
      */
