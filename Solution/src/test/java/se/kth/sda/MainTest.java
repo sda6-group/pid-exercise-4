@@ -21,12 +21,20 @@ public class MainTest {
     @Mock
     RequestHandler requestHandler;
 
+    // This stream will contain redirected output from System.print-methods
+    ByteArrayOutputStream outputStream;
+
     /**
-     * Initializes the mock.
+     * Set up Main so that it uses our "fake" mock request handler instead of sending actual http requests.
+     * Also initializes mock.
      */
     @Before
     public void setup() {
+        outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+
         MockitoAnnotations.initMocks(this);
+        Main.requestHandler = requestHandler;
     }
 
     /**
@@ -58,13 +66,10 @@ public class MainTest {
      */
     @Test
     public void testRunOptionPokemonInfo() throws IOException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-
         setUpInput("pikachu");
-        // Set up Main so that it uses our "fake" request handler instead of sending actual http requests.
-        Main.requestHandler = requestHandler;
         String example_response = readFileContent("src/test/resources/example_response_pokemon_pikachu.json");
+        // Here we define what the mock should return which should be the same as what the method would return if it used
+        // an actual http request
         Mockito.when(requestHandler.getResponseBodyFromUrl("https://pokeapi.co/api/v2/pokemon/pikachu")).thenReturn(example_response);
 
         Main.runOptionPokemonInformation();
@@ -77,30 +82,23 @@ public class MainTest {
     }
 
     /**
-     * This test tries out the method testRunOptionPokemonInfo with a pokémon name that shouldn't exist. The method
-     * relies on user input so we have to simulate it.
-     */
-    @Test
-    public void testRunOptionPokemonInfoBadInput() {
-        String userInput = "wadwad" +
-                "\n#";
-        setUpInput(userInput);
-
-        Main.runOptionPokemonInformation();
-    }
-
-    /**
      * This test tries out the method testRunOptionLocationInfo with location name. Since we don't have any return
      * value from the method and it also don't change the state of any input variables we can't really make use of
      * an assertEquals statement or similar. But what we can test is that for the given input it should terminate
      * without error.
      */
     @Test
-    public void testRunOptionLocationInfo() {
-        String userInput = "canalave-city";
-        setUpInput(userInput);
+    public void testRunOptionLocationInfo() throws IOException {
+        setUpInput("canalave-city");
+        String example_response = readFileContent("src/test/resources/example_response_location_canalave-city.json");
+        Mockito.when(requestHandler.getResponseBodyFromUrl("https://pokeapi.co/api/v2/location/canalave-city")).thenReturn(example_response);
 
         Main.runOptionLocationInformation();
+
+        String output = outputStream.toString();
+
+        assertThat(output, containsString("Name(s): (en) Canalave City / (fr) Joliberges"));
+        assertThat(output, containsString("Region: sinnoh"));
     }
 
 }
