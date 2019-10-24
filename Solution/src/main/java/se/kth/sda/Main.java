@@ -61,7 +61,7 @@ public class Main {
             if (inputPokemonName.equals("#")) {
                 return;
             }
-            response = getInfo(POKEMON_API_POKEMON_URL + inputPokemonName);
+            response = getResponseBodyFromUrl(POKEMON_API_POKEMON_URL + inputPokemonName);
             if (response != null) {
                 inputValid = true;
             } else {
@@ -93,7 +93,7 @@ public class Main {
         while (!inputValid) {
             System.out.println("Enter the name of Location: ");
             String inputLocation = (scanner.nextLine()).toLowerCase();
-            response = getInfo("https://pokeapi.co/api/v2/location/" + inputLocation);
+            response = getResponseBodyFromUrl("https://pokeapi.co/api/v2/location/" + inputLocation);
             if (response != null) {
                 inputValid = true;
             }
@@ -102,6 +102,8 @@ public class Main {
         JSONObject locationInfo = new JSONObject(response);
         JSONArray nameInfos = locationInfo.getJSONArray("names");
         Stream<JSONObject> namesStream = StreamSupport.stream(nameInfos.spliterator(), false).map(o -> (JSONObject) o);
+
+        // Here we have some wonderful stream magic :) Can you figure out how it works?
         String names = namesStream.map(
                 j -> "(" + j.getJSONObject("language").getString("name") + ") "
                         + j.getString("name"))
@@ -114,11 +116,16 @@ public class Main {
         System.out.println("\n");
     }
 
-    //returned value from API as String
-    public static String getInfo(String urli) {
+    /**
+     * Takes in an url and makes a get request to the given url and returns the body of the response as a string.
+     * Returns null if response code is not 200 or some unexpected error occurs with the connection.
+     * @param urlString
+     * @return
+     */
+    public static String getResponseBodyFromUrl(String urlString) {
         String response = null;
         try {
-            URL url = new URL(urli);
+            URL url = new URL(urlString);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.connect();
