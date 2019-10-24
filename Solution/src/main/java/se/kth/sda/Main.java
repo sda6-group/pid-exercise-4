@@ -3,9 +3,6 @@ package se.kth.sda;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,6 +12,7 @@ public class Main {
     private static final String POKEMON_API_BASE_URL = "https://pokeapi.co/api/v2/";
     private static final String POKEMON_API_POKEMON_URL = POKEMON_API_BASE_URL + "pokemon/";
     static Scanner scanner = new Scanner(System.in);
+    static RequestHandler requestHandler = new RequestHandler();
 
     public static void main(String[] args) {
         boolean exit = false;
@@ -58,7 +56,7 @@ public class Main {
             if (inputPokemonName.equals("#")) {
                 return;
             }
-            response = getResponseBodyFromUrl(POKEMON_API_POKEMON_URL + inputPokemonName);
+            response = requestHandler.getResponseBodyFromUrl(POKEMON_API_POKEMON_URL + inputPokemonName);
             if (response != null) {
                 inputValid = true;
             } else {
@@ -90,7 +88,7 @@ public class Main {
         while (!inputValid) {
             System.out.println("Enter the name of Location: ");
             String inputLocation = (scanner.nextLine()).toLowerCase();
-            response = getResponseBodyFromUrl("https://pokeapi.co/api/v2/location/" + inputLocation);
+            response = requestHandler.getResponseBodyFromUrl("https://pokeapi.co/api/v2/location/" + inputLocation);
             if (response != null) {
                 inputValid = true;
             }
@@ -113,36 +111,4 @@ public class Main {
         System.out.println("\n");
     }
 
-    /**
-     * Takes in an url and makes a get request to the given url and returns the body of the response as a string.
-     * Returns null if response code is not 200 or some unexpected error occurs with the connection.
-     *
-     * @param urlString
-     * @return
-     */
-    public static String getResponseBodyFromUrl(String urlString) {
-        String response = null;
-        try {
-            URL url = new URL(urlString);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.connect();
-            int responseCode = connection.getResponseCode();
-
-            // Code 200 is the standard response for get requests in the HTTP protocol.
-            if (responseCode != 200) {
-                System.out.println("Something went wrong with fetching the resource!\n" +
-                        "Code: " + responseCode);
-                return null;
-            } else {
-                Scanner responseScanner = new Scanner(connection.getInputStream());
-                while (responseScanner.hasNext()) {
-                    response = responseScanner.nextLine();
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return response;
-    }
 }
